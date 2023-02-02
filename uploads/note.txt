@@ -1,0 +1,1 @@
+folder uploads adalah folder temp ketika melakukan proses upload gambar
