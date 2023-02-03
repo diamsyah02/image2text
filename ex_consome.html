@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image2Text</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <form onsubmit="convert(event)">
+        <input type="file" name="image" id="image" required>
+        <button type="submit">Convert</button>
+        <article id="wrap-result">
+          <hgroup>
+            <h3>Result</h3>
+            <div id="result">Wait minute...</div>
+          </hgroup>
+        </article>
+      </form>
+    </div>
+  </main>
+  <script>
+    document.getElementById('wrap-result').style.display = 'none'
+    async function convert(e) {
+      e.preventDefault()
+      document.getElementById('wrap-result').style.display = 'block'
+      let file = document.getElementById('image')
+      let data = new FormData()
+      data.append('image', file.files[0])
+      let res = await (await fetch(`http://localhost:4000`, {
+        method: 'POST',
+        body: data
+      })).json()
+      document.getElementById('result').innerHTML = res.data
+    }
+  </script>
+</body>
+
+</html>
