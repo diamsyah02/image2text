@@ -21,7 +21,7 @@ const convert = async (img) => {
       status: 1,
       data: await (await Tesseract.recognize(img)).data.text
     }
-  } catch(e) {
+  } catch (e) {
     return {
       code: 400,
       status: 0,
